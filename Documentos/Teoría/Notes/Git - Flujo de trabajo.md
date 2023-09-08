@@ -138,3 +138,21 @@ git push origin <rama1> #Carga la rama1 de tu copia local a github.
 
 # Con los siguientes comandos se puede añadir o actualizar una rama en 
 ```
+
+## Como revertir un archivo a un commit previo
+
+Para revertir un archivo, a un commit previo escribimos:
+```bash
+git checkout <COMMIT_HASH> <file> # revierte el archivo y añade el cambio a stage
+```
+Para listar los hash de cada commit de un archivo específico, escribimos:
+```bash
+git log --oneline <file>
+```
+
+Una vez hecho el cambio, se debe hacer commit.
+Si nos equivocamos y queremos revertir al commit anterior, debemos escribir
+```bash
+git restore --staged <file> # Borra el cambio de stage
+git restore <file> # revierte el archivo
+```
