@@ -1,7 +1,7 @@
+#ifndef control_stage 
 #include <Arduino.h>
 #include <Wire.h>
-
-// Measures the angle of the robot using the MPU6050
+#define control_stage
 
 float RateRoll, RatePitch, RateYaw;
 float RateCalibrationRoll, RateCalibrationPitch, RateCalibrationYaw;
@@ -13,27 +13,8 @@ float KalmanAngleRoll=0, KalmanUncertaintyAngleRoll=2*2;
 float KalmanAnglePitch=0, KalmanUncertaintyAnglePitch=2*2;
 float Kalman1DOutput[]={0,0};
 
-float PitchOffset;
+float pitchOffset;
 
-void clockwise() {
-  digitalWrite(19, LOW);
-  delayMicroseconds(10);
-  digitalWrite(18, HIGH);
-
-  digitalWrite(2, LOW);
-  delayMicroseconds(10);
-  digitalWrite(4, HIGH);
-}
-
-void anticlockwise() {
-  digitalWrite(18, LOW);
-  delayMicroseconds(10);
-  digitalWrite(19, HIGH);
-
-  digitalWrite(4, LOW);
-  delayMicroseconds(10);
-  digitalWrite(2, HIGH);
-}
 
 void kalman_1d(float KalmanState, float KalmanUncertainty, float KalmanInput, float KalmanMeasurement) {
   KalmanState=KalmanState+0.004*KalmanInput;
@@ -44,6 +25,7 @@ void kalman_1d(float KalmanState, float KalmanUncertainty, float KalmanInput, fl
   Kalman1DOutput[0]=KalmanState; 
   Kalman1DOutput[1]=KalmanUncertainty;
 }
+
 void gyro_signals(void) {
   Wire.beginTransmission(0x68);
   Wire.write(0x1A);
@@ -79,17 +61,32 @@ void gyro_signals(void) {
   AccZ=(float)AccZLSB/4096;
   AngleRoll=atan(AccY/sqrt(AccX*AccX+AccZ*AccZ))*1/(3.142/180);
   AnglePitch=-atan(AccX/sqrt(AccY*AccY+AccZ*AccZ))*1/(3.142/180);
-}
-void setup() {
 
+}
+
+void KalmanAngles(void) {
+  gyro_signals();
+  RateRoll-=RateCalibrationRoll;
+  RatePitch-=RateCalibrationPitch;
+  RateYaw-=RateCalibrationYaw;
+  kalman_1d(KalmanAngleRoll, KalmanUncertaintyAngleRoll, RateRoll, AngleRoll);
+  KalmanAngleRoll=Kalman1DOutput[0]; 
+  KalmanUncertaintyAngleRoll=Kalman1DOutput[1];
+  kalman_1d(KalmanAnglePitch, KalmanUncertaintyAnglePitch, RatePitch, AnglePitch);
+  KalmanAnglePitch=Kalman1DOutput[0]; 
+  KalmanUncertaintyAnglePitch=Kalman1DOutput[1];
+}
+
+void ControlStageSetup() {
   pinMode(19, OUTPUT);
   pinMode(18, OUTPUT);
   pinMode(2, OUTPUT);
   pinMode(4, OUTPUT);
-
-  Serial.begin(115200);
-  pinMode(13, OUTPUT);
-  digitalWrite(13, HIGH);
+  delay(50);
+  digitalWrite(18, LOW);
+  digitalWrite(19, LOW);
+  digitalWrite(4, LOW);
+  digitalWrite(2, LOW);
   Wire.setClock(400000);
   Wire.begin();
   delay(250);
@@ -108,36 +105,5 @@ void setup() {
   RateCalibrationPitch/=2000;
   RateCalibrationYaw/=2000;
   LoopTimer=micros();
-
-  digitalWrite(18, LOW);
-  digitalWrite(19, LOW);
-  digitalWrite(4, LOW);
-  digitalWrite(2, LOW);
 }
-void loop() {
-
-
-  gyro_signals();
-  RateRoll-=RateCalibrationRoll;
-  RatePitch-=RateCalibrationPitch;
-  RateYaw-=RateCalibrationYaw;
-  kalman_1d(KalmanAngleRoll, KalmanUncertaintyAngleRoll, RateRoll, AngleRoll);
-  KalmanAngleRoll=Kalman1DOutput[0]; 
-  KalmanUncertaintyAngleRoll=Kalman1DOutput[1];
-  kalman_1d(KalmanAnglePitch, KalmanUncertaintyAnglePitch, RatePitch, AnglePitch);
-  KalmanAnglePitch=Kalman1DOutput[0]; 
-  KalmanUncertaintyAnglePitch=Kalman1DOutput[1];
-  Serial.print("Roll Angle [°] ");
-  Serial.print(KalmanAngleRoll);
-  Serial.print(" Pitch Angle [°] ");
-  Serial.println(KalmanAnglePitch);
-  while (micros() - LoopTimer < 4000);
-  LoopTimer=micros();
-  AnglePitch = KalmanAnglePitch;
-
-  if (AnglePitch>0) 
-    clockwise();
-  else 
-    anticlockwise();
-
-}
+#endif
