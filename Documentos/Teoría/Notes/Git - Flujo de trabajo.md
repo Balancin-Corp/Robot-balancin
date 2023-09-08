@@ -156,3 +156,13 @@ Si nos equivocamos y queremos revertir al commit anterior, debemos escribir
 git restore --staged <file> # Borra el cambio de stage
 git restore <file> # revierte el archivo
 ```
+
+
+## Como actualizar una rama de github
+
+```bash
+git fetch origin master
+git reset --hard FETCH_HEAD
+
+git config --system core.longpaths true
+```
