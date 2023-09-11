@@ -1,108 +1,81 @@
-[For leds](https://randomnerdtutorials.com/esp32-pwm-arduino-ide/)
+[Fuente](https://github.com/espressif/arduino-esp32/blob/master/docs/source/api/ledc.rst)
 
 En void setup hay que poner:
 ```cpp
-// the number of the LED pin
-const int ledPin = 16;  // 16 corresponds to GPIO16
+// the motor pins
+const int M1_A = 4;
+const int M1_B= 2;
+const int M2_A = 18;
+const int M2_B = 19;
 
-// setting PWM properties
-const int freq = 5000;
-const int ledChannel = 0;
-const int resolution = 8;
- 
+// PWM settings
+
+const int PWMfreq = 30000;
+const int ChM1_A = 0;
+const int ChM1_B = 1;
+const int ChM2_A = 2;
+const int ChM2_B = 3;
+const int PWMres = 16; // 16 bits
+const int PWMscale = 100;
+
+
+void PWPsetup() {
+
+	//Set the motor pins as output
+	pinMode(M1_A, OUTPUT);
+	pinMode(M1_B, OUTPUT);
+	pinMode(M2_A, OUTPUT);
+	pinMode(M2_B, OUTPUT);
+
+	//Set freq and resolution
+	ledcSetup(chM1_A, PWMfreq, PWMres);
+	ledcSetup(ChM1_B, PWMfreq, PWMres);
+	ledcSetup(chM2_A, PWMfreq, PWMres);
+	ledcSetup(ChM2_B, PWMfreq, PWMres);
+	
+	// attach the PWM channels to the Motor pins.
+	ledcAttachPin(M1_A, chM1_A);
+	ledcAttachPin(M1_B, chM1_B);
+	ledcAttachPin(M2_A, chM2_A);
+	ledcAttachPin(M2_B, chM2_B);
+}
+
+void MotorSpeed(int Motor, float Speed) { //Receives a float value between -PWMscale to PWMscale
+	switch (Motor) {
+		case 1:
+			if (Speed >= 0) { //Powers M1_A
+				ledcWrite(chM1_B, 0);
+				delayMicroseconds(50);
+				ledcWrite(chM1_A, (int)(Speed*65536.0/PWMscale));
+			}
+			else
+				ledcWrite(chM1_A, 0);
+				delayMicroseconds(50);
+				ledcWrite(chM1_B, (int)(-Speed*65536.0/PWMscale));
+			break;
+		case 2:
+			if (Speed >= 0) { //Powers M2_A
+				ledcWrite(chM2_B, 0);
+				delayMicroseconds(50);
+				ledcWrite(chM2_A, (int)(Speed*65536.0/PWMscale));
+			}
+			else
+				ledcWrite(chM2_A, 0);
+				delayMicroseconds(50);
+				ledcWrite(chM2_B, (int)(-Speed*65536.0/PWMscale));
+			break;	
+	}
+}
+
 void setup(){
-  // configure LED PWM functionalitites
-  ledcSetup(ledChannel, freq, resolution);
-  
-  // attach the channel to the GPIO to be controlled
-  ledcAttachPin(ledPin, ledChannel);
+
+	PWMsetup();
+
 }
  
 void loop(){
-  // increase the LED brightness
-  for(int dutyCycle = 0; dutyCycle <= 255; dutyCycle++){   
-    // changing the LED brightness with PWM
-    ledcWrite(ledChannel, dutyCycle);
-    delay(15);
-  }
 
-  // decrease the LED brightness
-  for(int dutyCycle = 255; dutyCycle >= 0; dutyCycle--){
-    // changing the LED brightness with PWM
-    ledcWrite(ledChannel, dutyCycle);   
-    delay(15);
-  }
 }
 ```
 
 
-[For motors](https://randomnerdtutorials.com/esp32-dc-motor-l298n-motor-driver-control-speed-direction/)
-
-```cpp
-// Motor A
-int motor1Pin1 = 27; 
-int motor1Pin2 = 26; 
-int enable1Pin = 14; 
-
-// Setting PWM properties
-const int freq = 30000;
-const int pwmChannel = 0;
-const int resolution = 8;
-int dutyCycle = 200;
-
-void setup() {
-  // sets the pins as outputs:
-  pinMode(motor1Pin1, OUTPUT);
-  pinMode(motor1Pin2, OUTPUT);
-  pinMode(enable1Pin, OUTPUT);
-  
-  // configure LED PWM functionalitites
-  ledcSetup(pwmChannel, freq, resolution);
-  
-  // attach the channel to the GPIO to be controlled
-  ledcAttachPin(enable1Pin, pwmChannel);
-
-  Serial.begin(115200);
-
-  // testing
-  Serial.print("Testing DC Motor...");
-}
-
-void loop() {
-  // Move the DC motor forward at maximum speed
-  Serial.println("Moving Forward");
-  digitalWrite(motor1Pin1, LOW);
-  digitalWrite(motor1Pin2, HIGH); 
-  delay(2000);
-
-  // Stop the DC motor
-  Serial.println("Motor stopped");
-  digitalWrite(motor1Pin1, LOW);
-  digitalWrite(motor1Pin2, LOW);
-  delay(1000);
-
-  // Move DC motor backwards at maximum speed
-  Serial.println("Moving Backwards");
-  digitalWrite(motor1Pin1, HIGH);
-  digitalWrite(motor1Pin2, LOW); 
-  delay(2000);
-
-  // Stop the DC motor
-  Serial.println("Motor stopped");
-  digitalWrite(motor1Pin1, LOW);
-  digitalWrite(motor1Pin2, LOW);
-  delay(1000);
-
-  // Move DC motor forward with increasing speed
-  digitalWrite(motor1Pin1, HIGH);
-  digitalWrite(motor1Pin2, LOW);
-  while (dutyCycle <= 255){
-    ledcWrite(pwmChannel, dutyCycle);   
-    Serial.print("Forward with duty cycle: ");
-    Serial.println(dutyCycle);
-    dutyCycle = dutyCycle + 5;
-    delay(500);
-  }
-  dutyCycle = 200;
-}
-```
