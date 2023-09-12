@@ -3,20 +3,23 @@
 
 #include <Arduino.h>
 
-const int M1_A = 26;
-const int M1_B= 25;
-const int M2_A = 18;
-const int M2_B = 19;
+extern const int M1_A;
+extern const int M1_B;
+extern const int M2_A;
+extern const int M2_B;
 
 // PWM settings
 
-const int PWMfreq = 30000;
-const int chM1_A = 0;
-const int chM1_B = 1;
-const int chM2_A = 2;
-const int chM2_B = 3;
-const int PWMres = 8; // 16 bits
-const int PWMscale = 100;
+extern const int PWMfreq;
+extern const int chM1_A;
+extern const int chM1_B;
+extern const int chM2_A;
+extern const int chM2_B;
+extern const int PWMres; // 16 bits
+extern const int PWMres_bits;
+
+extern const int PWMscale;
+
 
 
 void PWMsetup();

@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <kalmanAngle.h>
 #include <controlStage.h>
 
 TaskHandle_t controlStage;
@@ -23,6 +24,11 @@ void Task2code( void * pvParameters ){
   Serial.println(xPortGetCoreID());
 
   for(;;){
+    Serial.print("Angle pitch = ");
+    Serial.println(KalmanAnglePitch);
+    delay(500);
+    //PID control:
+
   }
 }
 

@@ -4,20 +4,20 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-float RateRoll, RatePitch, RateYaw;
-float RateCalibrationRoll, RateCalibrationPitch, RateCalibrationYaw;
-int RateCalibrationNumber;
-float AccX, AccY, AccZ;
-float AngleRoll, AnglePitch;
-uint32_t LoopTimer;
-float KalmanAngleRoll=0, KalmanUncertaintyAngleRoll=2*2;
-float KalmanAnglePitch=0, KalmanUncertaintyAnglePitch=2*2;
-float Kalman1DOutput[]={0,0};
-float PitchOffset;
+extern float RateRoll, RatePitch, RateYaw;
+extern float RateCalibrationRoll, RateCalibrationPitch, RateCalibrationYaw;
+extern int RateCalibrationNumber;
+extern float AccX, AccY, AccZ;
+extern float AngleRoll, AnglePitch;
+extern uint32_t LoopTimer;
+extern float KalmanAngleRoll, KalmanUncertaintyAngleRoll;
+extern float KalmanAnglePitch, KalmanUncertaintyAnglePitch;
+extern float Kalman1DOutput[];
+extern float PitchOffset;
 
 void gyroSignals();
 void kalman_1d();
-void KalmanAngleSetup();
+void kalmanAngleSetup();
 void updateKalmanAngle();
 
 #endif

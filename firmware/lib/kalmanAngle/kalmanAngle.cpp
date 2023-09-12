@@ -1,5 +1,17 @@
 #include <kalmanAngle.h>
 
+float RateRoll, RatePitch, RateYaw;
+float RateCalibrationRoll, RateCalibrationPitch, RateCalibrationYaw;
+int RateCalibrationNumber;
+float AccX, AccY, AccZ;
+float AngleRoll, AnglePitch;
+uint32_t LoopTimer;
+float KalmanAngleRoll=0, KalmanUncertaintyAngleRoll=2*2;
+float KalmanAnglePitch=0, KalmanUncertaintyAnglePitch=2*2;
+float Kalman1DOutput[]={0,0};
+float PitchOffset;
+
+
 void kalman_1d(float KalmanState, float KalmanUncertainty, float KalmanInput, float KalmanMeasurement) {
   KalmanState=KalmanState+0.004*KalmanInput;
   KalmanUncertainty=KalmanUncertainty + 0.004 * 0.004 * 4 * 4;

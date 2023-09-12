@@ -1,17 +1,14 @@
 #include <Arduino.h>
 #include <PWM.h>
 
-
 void setup() {
     Serial.begin(115200);
     PWMsetup();
 }
 
 void loop() {
-    ledcWrite(chM1_A, 255);
+    MotorSpeed(1, 100);
     delay(1000);
-    ledcWrite(chM1_A, 128);
-    delay(1000);
-    ledcWrite(chM1_A, 0);
+    MotorSpeed(1, -100);
     delay(1000);
 }
