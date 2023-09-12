@@ -1,0 +1,275 @@
+{
+  "main": {
+    "id": "19a5e6d81a1961bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "8dedfeb9719d5929",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8d97b4aecf801766",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Documentos/Teoría/Notes/ESP32.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f084cea606e92496",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Documentos/Teoría/Notes/Serialplot.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a76a54194463d93c",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Imagenes/SerialPlot/SerialPlot Graph.png"
+              }
+            }
+          },
+          {
+            "id": "8b4d23b124acfe89",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Imagenes/SerialPlot/SerialPlot.png"
+              }
+            }
+          },
+          {
+            "id": "5f2d35f3ba38e2e0",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Imagenes/SerialPlot/SerialPlot Graph.png"
+              }
+            }
+          },
+          {
+            "id": "2531148fdb19267c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Documentos/Teoría/Notes/ESP32 - PWM.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "48707b70cf145018",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Documentos/Teoría/Notes/ESP32.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "29c8e23ba675990a",
+    "type": "split",
+    "children": [
+      {
+        "id": "3cc9ed7e904d15d1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5fc53faf56b22db1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "56986c155c34f393",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "f87c81768c02d72c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1274c614bf0f731d",
+    "type": "split",
+    "children": [
+      {
+        "id": "dc381ab79c54b01d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5fffb34354ffc4d8",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Documentos/Teoría/Notes/ESP32 - PWM.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6447d30639cfcbdd",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Documentos/Teoría/Notes/ESP32 - PWM.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "d175c034b283eab8",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "9b50306aaa43acac",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Documentos/Teoría/Notes/ESP32 - PWM.md"
+              }
+            }
+          },
+          {
+            "id": "b9123ca9c6a1a06f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo canvas": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false
+    }
+  },
+  "active": "5fc53faf56b22db1",
+  "lastOpenFiles": [
+    "Estados de avance/Estado diario/07-09-23.md",
+    "Estados de avance/attachments/Pasted image 20230912195348.png",
+    "Estados de avance/attachments/Pasted image 20230908092440.png",
+    "Estados de avance/attachments/Pasted image 20230908090021.png",
+    "Estados de avance/attachments/Pasted image 20230908085632.png",
+    "Estados de avance/Semana 23 - 15-09-23.md",
+    "Estados de avance/Semana 22 - 08-09-23.md",
+    "Estados de avance/Semana 21 - 01-09-23.md",
+    "Estados de avance/Semana 20 - 25-08-23.md",
+    "Estados de avance/Semana 19 - 18-08-23.md",
+    "Estados de avance/Semana 18 - 11-08-23.md",
+    "Estados de avance/Semana 17 - 04-08-23.md",
+    "Estados de avance/Semana 16 - 14-07-23.md",
+    "Estados de avance/Semana 15 - 07-07-23.md",
+    "Estados de avance/Semana 14 - 30-06-23.md",
+    "Estados de avance/Semana 13 - 23-06-23.md",
+    "Estados de avance/Semana 12 - 16-06-23.md",
+    "Estados de avance/Semana 11 - 09-06-23.md",
+    "Estados de avance/Semana 10 - 02-06-23.md",
+    "Estados de avance/Semana 09 - 26-05-23.md",
+    "Estados de avance/Semana 08 - 19-05-23.md",
+    "Estados de avance/Semana 07 - 12-05-23.md",
+    "Estados de avance/Semana 06 - 05-05-23.md",
+    "Estados de avance/Semana 05 - 28-04-23.md",
+    "Estados de avance/Semana 04 - 21-04-23.md",
+    "Estados de avance/Semana 03 - 14-04-23.md",
+    "Estados de avance/Semana 02 - 07-04-23.md",
+    "Estados de avance/Semana 01 - 31-03-23.md",
+    "Estados de avance/Estado diario",
+    "Estados de avance/attachments",
+    "Estados de avance",
+    "firmware/src/main.cpp",
+    "firmware/otros programas/PWMtestv1.cpp",
+    "firmware/test/README",
+    "firmware/test",
+    "firmware/src/PWMtestv1.cpp",
+    "firmware/src",
+    "firmware/otros programas/main_v1.cpp",
+    "Documentos/Teoría/Notes/ESP32 - Dual core.md",
+    "Documentos/Teoría/Notes/Serialplot.md",
+    "Imagenes/SerialPlot/SerialPlot Graph.png",
+    "Documentos/Teoría/Notes/attachments/Pasted image 20230907172349.png",
+    "Documentos/Teoría/Notes/attachments/Pasted image 20230907171942.png",
+    "Documentos/Teoría/Notes/attachments/Pasted image 20230906192214.png",
+    "Imagenes/SerialPlot/SerialPlot.png",
+    "Imagenes/SerialPlot/IMPORTANTE ascii.png"
+  ]
+}
