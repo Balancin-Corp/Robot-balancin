@@ -1,6 +1,5 @@
 [Fuente](https://github.com/espressif/arduino-esp32/blob/master/docs/source/api/ledc.rst)
 
-En void setup hay que poner:
 ```cpp
 // the motor pins
 const int M1_A = 4;
