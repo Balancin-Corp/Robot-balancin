@@ -5,13 +5,14 @@
 TaskHandle_t controlStage;
 TaskHandle_t Task2;
 
+
 void Task1code( void * pvParameters );
 void Task2code( void * pvParameters );
 
 void setup() {
   Serial.begin(115200); 
 
-  xTaskCreatePinnedToCore(controlStageLoop, "Task1", 10000, NULL, 1, &controlStage, 0);               
+  xTaskCreatePinnedToCore(controlStageLoop, "Task1", 100000, NULL, 1, &controlStage, 0);               
   delay(500); 
 
   xTaskCreatePinnedToCore(Task2code, "Task2", 10000, NULL, 1, &Task2, 1);

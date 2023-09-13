@@ -1,8 +1,8 @@
 #include <PWM.h>
 
-const int M1_A = 26;
-const int M1_B= 25;
-const int M2_A = 18;
+const int M1_A = 4;
+const int M1_B= 18;
+const int M2_A = 16;
 const int M2_B = 19;
 
 // PWM settings
@@ -29,14 +29,14 @@ void PWMsetup() {
 	//Set freq and resolution
 	ledcSetup(chM1_A, PWMfreq, PWMres);
 	ledcSetup(chM1_B, PWMfreq, PWMres);
-	/*ledcSetup(chM2_A, PWMfreq, PWMres);
-	ledcSetup(chM2_B, PWMfreq, PWMres);*/
+	ledcSetup(chM2_A, PWMfreq, PWMres);
+	ledcSetup(chM2_B, PWMfreq, PWMres);
 	
 	// attach the PWM channels to the Motor pins.
 	ledcAttachPin(M1_A, chM1_A);
 	ledcAttachPin(M1_B, chM1_B);
-	/*ledcAttachPin(M2_A, chM2_A);
-	ledcAttachPin(M2_B, chM2_B);*/
+	ledcAttachPin(M2_A, chM2_A);
+	ledcAttachPin(M2_B, chM2_B);
 
     ledcWrite(chM1_A, 0);
     ledcWrite(chM1_B, 0);
@@ -58,6 +58,18 @@ void MotorSpeed(int Motor, float speed) { //Receives a float value between -PWMs
 				ledcWrite(chM1_A, 0);
 				delayMicroseconds(50);
 				ledcWrite(chM1_B, (int)(-speed*PWMres_bits/PWMscale));
+            }
+            return;
+		case 2:
+			if (speed >= 0) { //Powers M1_A
+				ledcWrite(chM2_B, 0);
+				delayMicroseconds(50);
+				ledcWrite(chM2_A, (int)(speed*PWMres_bits/PWMscale));
+			}
+			else {
+				ledcWrite(chM2_A, 0);
+				delayMicroseconds(50);
+				ledcWrite(chM2_B, (int)(-speed*PWMres_bits/PWMscale));
             }
             return;
 	}
