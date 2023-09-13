@@ -5,9 +5,9 @@ float dt=2; //The duration of each loop in ms.
 float E=0;
 float dE;
 float IE;
-float PID;
+float PID=0;
 
-float PID_E = 8.3;
+float PID_E = 8;
 float PID_dE = 0;
 float PID_IE = 0;
 
@@ -31,8 +31,8 @@ void controlStageLoop(void* pvParameters) {
         updateKalmanAngle();
 
         updatePID();
-        MotorSpeed(1, 100);
-        MotorSpeed(2, 100);
+        MotorSpeed(1, PID);
+        MotorSpeed(2, PID);
         //Ensures the loop lasts 4ms.
         while (micros() - LoopTimer < dt*1000)
             LoopTimer=micros();

@@ -140,6 +140,7 @@ void setup() {
 void loop() {
     KalmanAngle();
     float A = KalmanAnglePitch;
+    Serial.println(KalmanAnglePitch);
 
 
 
