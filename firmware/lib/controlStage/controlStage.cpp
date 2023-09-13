@@ -7,9 +7,9 @@ float dE;
 float IE;
 float PID=0;
 
-float PID_E = 8;
-float PID_dE = 0;
-float PID_IE = 0;
+float PID_P = 8;
+float PID_I = 0;
+float PID_D = 0;
 
 float angleOffset=0;
 
@@ -18,7 +18,7 @@ void updatePID() {
     E = KalmanAnglePitch-angleOffset;
     dE = RatePitch;
     IE += E*dt;  //The idea is to use another Kalman filter to find the integral.
-    PID = PID_E*E;
+    PID = PID_P*E;
 }
 
 

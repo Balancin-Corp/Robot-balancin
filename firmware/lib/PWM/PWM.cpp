@@ -1,9 +1,9 @@
 #include <PWM.h>
 
-const int M1_A = 4;
-const int M1_B= 16;
-const int M2_A = 18;
-const int M2_B = 19;
+const int M1_A = 16;
+const int M1_B= 4;
+const int M2_A = 19;
+const int M2_B = 18;
 
 // PWM settings
 

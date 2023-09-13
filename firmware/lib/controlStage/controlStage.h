@@ -12,9 +12,9 @@ extern float dE;
 extern float IE;
 extern float PID;
 
-extern float PID_E;
-extern float PID_dE;
-extern float PID_IE;
+extern float PID_P;
+extern float PID_I;
+extern float PID_D;
 
 extern float angleOffset;
 
