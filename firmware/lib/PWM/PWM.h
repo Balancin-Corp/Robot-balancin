@@ -20,6 +20,15 @@ extern const int PWMres_bits;
 
 extern const int PWMscale;
 
+extern int delayM1, delayM2;
+
+extern float balanceCL1;
+extern float balanceCL2;
+extern float balanceCL12;
+extern float balanceACL1;
+extern float balanceACL2;
+extern float balanceACL12;
+
 
 
 void PWMsetup();

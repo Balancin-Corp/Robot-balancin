@@ -12,7 +12,7 @@ float getValue(String);
 
 
 void setup() {
-  Serial.begin(115200); 
+  Serial.begin(115200);
   SerialBT.begin("ESP32");
   //Creates controlStage task
   xTaskCreatePinnedToCore(controlStageLoop, "controlStage", 100000, NULL, 1, &controlStage, 0);               
@@ -42,6 +42,44 @@ void loop() {
         case 'D':
           PID_D = getValue(text);
           break;
+        case 'B':
+          balanceCL12 = getValue(text);
+          if (balanceCL12 <=0) balanceCL12 = 1;
+          if (balanceCL12 >=1) { //If balance12 >=1, then M1 will receive more voltage than M2
+            balanceCL1 = 1;
+            balanceCL2 = balanceCL1/balanceCL12;
+          }
+          else if (balanceCL12<1) {
+            balanceCL2 = 1;
+            balanceCL1 = balanceCL2*balanceCL12;
+          }
+          break;
+        case 'b':
+          balanceACL12 = getValue(text);
+          if (balanceACL12 <=0) balanceACL12 = 1;
+          if (balanceACL12 >=1) { //If balance12 >=1, then M1 will receive more voltage than M2
+            balanceACL1 = 1;
+            balanceACL2 = balanceACL1/balanceACL12;
+          }
+          else if (balanceACL12<1) {
+            balanceACL2 = 1;
+            balanceACL1 = balanceACL2*balanceACL12;
+          }
+          break;
+
+
+        {/*case 'A':
+          motor1Voffset = getValue(text);
+          break;
+        case 'B':
+          motor2Voffset = getValue(text);
+          break;
+        case 'a':
+          delayM1 = (int)(getValue(text));
+          break;
+        case 'b':
+          delayM2 = (int)(getValue(text));
+          break;*/}
       }
   
   }
@@ -52,21 +90,28 @@ void loop() {
   
 void printValues() {
 
-  SerialBT.print("Angle = ");
-  SerialBT.println(KalmanAnglePitch);
+  SerialBT.print("Angle = "); SerialBT.println(KalmanAnglePitch);
 
-  SerialBT.print("AngleOffset = ");
-  SerialBT.println(angleOffset);
+  SerialBT.print("AngleOffset = "); SerialBT.println(angleOffset);
+  {
+  /*SerialBT.print("M1Voffset = "); SerialBT.println(motor1Voffset);
+  
+  SerialBT.print("M2Voffset = "); SerialBT.println(motor2Voffset);
 
+  SerialBT.print("Delay M1 = "); SerialBT.println(delayM1);
 
-  SerialBT.print("PID_E = ");
-  SerialBT.println(PID_P);
+  SerialBT.print("Delay M2 = "); SerialBT.println(delayM2);*/
+  }
+  
+  SerialBT.print("BalanceCL12 = "); SerialBT.println(balanceCL12);
 
-  SerialBT.print("PID_D = ");
-  SerialBT.println(PID_D);
+  SerialBT.print("BalanceACL12 = "); SerialBT.println(balanceACL12);
 
-  SerialBT.print("PID_I = ");
-  SerialBT.println(PID_I);
+  SerialBT.print("PID_E = "); SerialBT.println(PID_P);
+
+  SerialBT.print("PID_D = "); SerialBT.println(PID_D);
+
+  SerialBT.print("PID_I = "); SerialBT.println(PID_I);
 }
 
 float getValue(String text) {

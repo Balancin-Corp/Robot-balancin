@@ -7,29 +7,27 @@ float dE;
 float IE;
 float PID=0;
 
-float PID_P = 8;
+float PID_P = 0;
 float PID_I = 0;
 float PID_D = 0;
 
-float angleOffset=0;
+float angleOffset=-1;
 
 void updatePID() {
     float prevE = E;
     E = KalmanAnglePitch-angleOffset;
     dE = RatePitch;
     IE += E*dt;  //The idea is to use another Kalman filter to find the integral.
-    PID = PID_P*E;
+    PID = PID_P*E + PID_I*IE + PID_D*dE;
 }
 
 
 void controlStageLoop(void* pvParameters) {
-    //Updates KalmanAnglePitch and KalmanAngleRoll
     kalmanAngleSetup();
     PWMsetup();
     //control loop
     while (1) {
         updateKalmanAngle();
-
         updatePID();
         MotorSpeed(1, PID);
         MotorSpeed(2, PID);
