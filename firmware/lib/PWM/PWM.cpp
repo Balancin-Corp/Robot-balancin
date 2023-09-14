@@ -91,3 +91,14 @@ void MotorSpeed(int Motor, float speed) { //Receives a float value between -PWMs
 	}
 }
 
+void updateBalance(float* balance12, float* balance1, float* balance2) {
+	if (*balance12 <=0) *balance12 = 1;
+	if (*balance12 >=1) { //If balance12 >=1, then M1 will receive more voltage than M2
+	*balance1 = 1;
+	*balance2 = *balance1/(*balance12);
+	}
+	else if (*balance12<1) {
+	*balance2 = 1;
+	*balance1 = *balance2*(*balance12);
+	}
+}
