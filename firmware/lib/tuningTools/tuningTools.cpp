@@ -58,7 +58,10 @@ void tuningToolsInput() {
     if (SerialBT.available()) {
         String text = SerialBT.readStringUntil('\n');
     //SerialBT adds an space to text, so is impossible for it to be empty
-    
+        if (includedIn("IE")) { //Sets integral to zero.
+            IE = 0;
+            return ;
+        }   
         if (includedIn("X", text) || includedIn("x", text)) {
             printValues();
             return;
