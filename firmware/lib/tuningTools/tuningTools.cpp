@@ -14,30 +14,32 @@ int includedIn(String string1, String string2) {
 }
 
 
-void printValues() {
+void printValues(String keyword) {
+    if (keyword == "angle" || keyword == "all") {//Shows all angle related values
+        SerialBT.print("Angle = "); SerialBT.println(KalmanAnglePitch);
+        SerialBT.print("AngleOffset = "); SerialBT.println(angleOffset);
+        SerialBT.println();
+    }
+    if (keyword == "pid" || keyword == "all") { //Shows all pid related values
+        SerialBT.print("PID_E = "); SerialBT.println(PID_P);
+        SerialBT.print("PID_D = "); SerialBT.println(PID_D);
+        SerialBT.print("PID_I = "); SerialBT.println(PID_I);
+        SerialBT.println();
+        SerialBT.print("E = "); SerialBT.println(E);
+        SerialBT.print("IE = "); SerialBT.println(IE);
+        SerialBT.print("dE = "); SerialBT.println(dE);
+        SerialBT.println();   
+    }
+    if (keyword == "balance" || keyword == "all") {//Shows all balance related values
+        SerialBT.print("BalanceCL12 = "); SerialBT.println(balanceCL12);
+        SerialBT.print("BalanceACL12 = "); SerialBT.println(balanceACL12);
+        SerialBT.println();
+    }
 
-  SerialBT.print("Angle = "); SerialBT.println(KalmanAnglePitch);
-
-  SerialBT.print("AngleOffset = "); SerialBT.println(angleOffset);
-  {
-  /*SerialBT.print("M1Voffset = "); SerialBT.println(motor1Voffset);
-  
-  SerialBT.print("M2Voffset = "); SerialBT.println(motor2Voffset);
-
-  SerialBT.print("Delay M1 = "); SerialBT.println(delayM1);
-
-  SerialBT.print("Delay M2 = "); SerialBT.println(delayM2);*/
-  }
-  
-  SerialBT.print("BalanceCL12 = "); SerialBT.println(balanceCL12);
-
-  SerialBT.print("BalanceACL12 = "); SerialBT.println(balanceACL12);
-
-  SerialBT.print("PID_E = "); SerialBT.println(PID_P);
-
-  SerialBT.print("PID_D = "); SerialBT.println(PID_D);
-
-  SerialBT.print("PID_I = "); SerialBT.println(PID_I);
+    if (keyword == "looptimer" || keyword == "all") {//Shows all looptimer related values
+        SerialBT.print("minLoopTimer = "); SerialBT.print(minLoopTimer);
+        SerialBT.print("maxLoopTimer = "); SerialBT.print(maxLoopTimer);
+    }
 }
 
 
@@ -57,13 +59,17 @@ float getValue(String text) {
 void tuningToolsInput() {
     if (SerialBT.available()) {
         String text = SerialBT.readStringUntil('\n');
-    //SerialBT adds an space to text, so is impossible for it to be empty
-        if (includedIn("IE")) { //Sets integral to zero.
+    //SerialBT adds an space to text, so it's impossible for it to be empty
+        if (includedIn("IE", text)) { //Sets integral to zero.
             IE = 0;
             return ;
         }   
         if (includedIn("X", text) || includedIn("x", text)) {
-            printValues();
+            String keywords[5] = {"angle", "pid", "balance", "looptimer", "all"};
+            for (int i = 0; i < 5; i++) {
+                if (includedIn(keywords[i], text))
+                    printValues(keywords[i]);
+            }
             return;
         }
         if (includedIn("P", text) || includedIn("p", text)) {

@@ -7,7 +7,7 @@
 extern BluetoothSerial SerialBT;
 
 void tuningToolsSetup();
-void printValues();
+void printValues(String keyword);
 float getValue(String);
 int includedIn(String string1, String String2);
 void tuningToolsInput();

@@ -17,7 +17,8 @@ extern float PID_I;
 extern float PID_D;
 
 extern float angleOffset;
-
+extern float maxLoopTimer;
+extern float minLoopTimer;
 
 void updatePID();
 
