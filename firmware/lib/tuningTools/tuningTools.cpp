@@ -36,9 +36,10 @@ void printValues(String keyword) {
         SerialBT.println();
     }
 
-    if (keyword == "looptimer" || keyword == "all") {//Shows all looptimer related values
-        SerialBT.print("minLoopTimer = "); SerialBT.print(minLoopTimer);
-        SerialBT.print("maxLoopTimer = "); SerialBT.print(maxLoopTimer);
+    if (keyword == "elapsedtime" || keyword == "all") {//Shows all looptimer related values
+        SerialBT.print("elapsedTime = "); SerialBT.print(elapsedTime);SerialBT.println("ms");
+        SerialBT.print("minElapsedTime = "); SerialBT.print(minElapsedTime);SerialBT.println("ms");
+        SerialBT.print("maxElapsedTime = "); SerialBT.print(maxElapsedTime);SerialBT.println("ms");
     }
 }
 

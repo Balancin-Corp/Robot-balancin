@@ -4,12 +4,13 @@
 #include <Arduino.h>
 #include <Wire.h>
 
+
 extern float RateRoll, RatePitch, RateYaw;
 extern float RateCalibrationRoll, RateCalibrationPitch, RateCalibrationYaw;
 extern int RateCalibrationNumber;
 extern float AccX, AccY, AccZ;
 extern float AngleRoll, AnglePitch;
-extern uint32_t LoopTimer;
+
 extern float KalmanAngleRoll, KalmanUncertaintyAngleRoll;
 extern float KalmanAnglePitch, KalmanUncertaintyAnglePitch;
 extern float Kalman1DOutput[];

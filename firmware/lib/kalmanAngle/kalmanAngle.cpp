@@ -5,7 +5,6 @@ float RateCalibrationRoll, RateCalibrationPitch, RateCalibrationYaw;
 int RateCalibrationNumber;
 float AccX, AccY, AccZ;
 float AngleRoll, AnglePitch;
-uint32_t LoopTimer;
 float KalmanAngleRoll=0, KalmanUncertaintyAngleRoll=2*2;
 float KalmanAnglePitch=0, KalmanUncertaintyAnglePitch=2*2;
 float Kalman1DOutput[]={0,0};
@@ -75,7 +74,6 @@ void kalmanAngleSetup() {
   RateCalibrationRoll/=2000;
   RateCalibrationPitch/=2000;
   RateCalibrationYaw/=2000;
-  LoopTimer=micros();
 }
 
 void updateKalmanAngle() {

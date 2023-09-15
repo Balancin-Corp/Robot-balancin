@@ -5,6 +5,9 @@
 #include <KalmanAngle.h>
 #include <PWM.h>
 
+
+extern uint32_t LoopTimer;
+
 extern float dt; //The duration of each loop in ms. 
 
 extern float E;
@@ -17,8 +20,10 @@ extern float PID_I;
 extern float PID_D;
 
 extern float angleOffset;
-extern float maxLoopTimer;
-extern float minLoopTimer;
+
+extern float elapsedTime;
+extern float maxElapsedTime;
+extern float minElapsedTime;
 
 void updatePID();
 
