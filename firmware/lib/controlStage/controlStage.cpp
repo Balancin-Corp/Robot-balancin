@@ -1,11 +1,11 @@
 #include <controlStage.h>
 
-float dt=2; //The duration of each loop in ms. 
+float dt = 4; //The duration of each loop in ms. 
 
-float E=0;
-float dE;
-float IE;
-float PID=0;
+float E = 0;
+float dE = 0;
+float IE = 0;
+float PID = 0;
 
 float PID_P = 0;
 float PID_I = 0;
@@ -17,7 +17,7 @@ void updatePID() {
     float prevE = E;
     E = KalmanAnglePitch-angleOffset;
     dE = RatePitch;
-    IE += E*dt;  //The idea is to use another Kalman filter to find the integral.
+    IE += E*dt/1000000; 
     PID = PID_P*E + PID_I*IE + PID_D*dE;
 }
 
