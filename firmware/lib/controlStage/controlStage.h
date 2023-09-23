@@ -10,20 +10,21 @@ extern uint32_t LoopTimer;
 
 extern float dt; //The duration of each loop in ms. 
 
-extern float E;
-extern float dE;
-extern float IE;
-extern float PID;
+extern float E1;
+extern float dE1;
+extern float IE1;
+extern float KP1;
+extern float KI1;
+extern float KD1;
+extern float PID1;
 
-extern float PID_P;
-extern float PID_I;
-extern float PID_D;
 
 extern float angleOffset;
 
 extern float elapsedTime;
-extern float maxElapsedTime;
-extern float minElapsedTime;
+
+
+inline int clamp(float, float, float);
 
 void updatePID();
 

@@ -32,7 +32,7 @@ extern float balanceACL12;
 
 void updateBalance(float* balance12, float* balance1, float* balance2);
 void PWMsetup();
-void MotorSpeed(int Motor, float Speed); //Receives a float value between -PWMscale to PWMscale
+void MotorSpeed(int chM_A, int chM_B, float Speed); //Receives a float value between -PWMscale to PWMscale
 
 
 #endif

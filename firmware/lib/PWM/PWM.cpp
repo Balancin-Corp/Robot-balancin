@@ -19,12 +19,6 @@ const int PWMres_bits = 1023;
 int delayM1 = 10;
 int delayM2 = 10;
 
-float balanceCL1 = 1;
-float balanceCL2 = 0.92;
-float balanceCL12 = 0.92;
-float balanceACL1 = 1;
-float balanceACL2 = 0.9;
-float balanceACL12 = 0.9;
 
 
 void PWMsetup() {
@@ -53,43 +47,23 @@ void PWMsetup() {
     ledcWrite(chM2_B, 0);
 }
 
-void MotorSpeed(int Motor, float speed) { //Receives a float value between -PWMscale to PWMscale
-	if (speed > PWMscale) 
-		speed = PWMscale;
-    if (speed < -PWMscale) 
-		speed = -PWMscale;
+void MotorSpeed(int chM_A, int chM_B, float speed) { //Receives a float value between -PWMscale to PWMscale
 
 	int speed_bits = (int)abs(speed*((float)(PWMres_bits)/PWMscale));
-	switch (Motor) {
-		case 1:
-			
-			if (speed >= 0) { //Powers M1_A
-				ledcWrite(chM1_B, 0);
-				delayMicroseconds(50);
-				ledcWrite(chM1_A, balanceCL1*speed_bits);
-			}
-			else {
-				ledcWrite(chM1_A, 0);
-				delayMicroseconds(50);
-				ledcWrite(chM1_B, balanceACL1*speed_bits);
-			}
-			break;
 
-		case 2:
-			if (speed >= 0) { //Powers M1_A
-				ledcWrite(chM2_B, 0);
-				delayMicroseconds(50);
-				ledcWrite(chM2_A, balanceCL2*speed_bits);
-			}
-			else {
-				ledcWrite(chM2_A, 0);
-				delayMicroseconds(50);
-				ledcWrite(chM2_B, balanceACL2*speed_bits);
-			}
-			break;
-
+	if (speed >= 0) { //Powers M_A
+		ledcWrite(chM_B, 0);
+		delayMicroseconds(50);
+		ledcWrite(chM_A, speed_bits);
 	}
+	else {
+		ledcWrite(chM_A, 0);
+		delayMicroseconds(50);
+		ledcWrite(chM_B, speed_bits);
+	}
+
 }
+
 
 void updateBalance(float* balance12, float* balance1, float* balance2) {
 	if (*balance12 <=0) *balance12 = 1;
