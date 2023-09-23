@@ -18,8 +18,17 @@ extern float KI1;
 extern float KD1;
 extern float PID1;
 
-
 extern float angleOffset;
+
+
+extern float E2;
+extern float dE2;
+extern float IE2;
+extern float KP2;
+extern float KI2;
+extern float KD2;
+extern float PID2;
+extern float rateYawOffset;
 
 extern float elapsedTime;
 
