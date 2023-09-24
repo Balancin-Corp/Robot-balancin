@@ -1,6 +1,9 @@
 #include <tuningTools.h>
 BluetoothSerial SerialBT;
 
+String strList[] = {"p1", "p2", "i1", "i2", "d1", "d2", "o1", "o2"};
+float* val[] = {&KP1, &KP2, &KI1, &KI2, &KD1, &KD2, &angleOffset, &rateYawOffset};
+
 void tuningToolsSetup() {
     SerialBT.begin("ESP32");
 }
@@ -20,23 +23,27 @@ void printValues(String keyword) {
         SerialBT.print("AngleOffset = "); SerialBT.println(angleOffset);
         SerialBT.println();
     }
-    if (keyword == "pid" || keyword == "all") { //Shows all pid related values
-        SerialBT.print("PID_E = "); SerialBT.println(KP1);
-        SerialBT.print("PID_D = "); SerialBT.println(KD1);
-        SerialBT.print("PID_I = "); SerialBT.println(KI1);
+    if (keyword == "pid1" || keyword == "all") { //Shows all pid related values
+        SerialBT.print("KP1 = "); SerialBT.println(KP1);
+        SerialBT.print("KI1 = "); SerialBT.println(KI1);
+        SerialBT.print("KD1 = "); SerialBT.println(KD1);
         SerialBT.println();
-        SerialBT.print("E = "); SerialBT.println(E1);
-        SerialBT.print("IE = "); SerialBT.println(IE1);
-        SerialBT.print("dE = "); SerialBT.println(dE1);
+        SerialBT.print("E1 = "); SerialBT.println(E1);
+        SerialBT.print("IE1 = "); SerialBT.println(IE1);
+        SerialBT.print("dE1 = "); SerialBT.println(dE1);
         SerialBT.println();   
     }
-    if (keyword == "balance" || keyword == "all") {//Shows all balance related values
+    if (keyword == "pid2" || keyword == "all") { //Shows all pid related values
+        SerialBT.print("KP2 = "); SerialBT.println(KP2);
+        SerialBT.print("KI2 = "); SerialBT.println(KI2);
+        SerialBT.print("KD2 = "); SerialBT.println(KD2);
         SerialBT.println();
+        SerialBT.print("E2 = "); SerialBT.println(E2);
+        SerialBT.print("IE2 = "); SerialBT.println(IE2);
+        SerialBT.print("dE2 = "); SerialBT.println(dE2);
+        SerialBT.println();   
     }
 
-    if (keyword == "elapsedtime" || keyword == "all") {//Shows all looptimer related values
-        SerialBT.print("elapsedTime = "); SerialBT.print(elapsedTime);SerialBT.println("ms");
-    }
 }
 
 
@@ -62,32 +69,20 @@ void tuningToolsInput() {
             return ;
         }   
         if (includedIn("X", text) || includedIn("x", text)) {
-            String keywords[5] = {"angle", "pid", "balance", "looptimer", "all"};
+            String keywords[5] = {"angle", "pid1", "pid2", "all"};
             for (int i = 0; i < 5; i++) {
                 if (includedIn(keywords[i], text))
                     printValues(keywords[i]);
             }
             return;
         }
-        if (includedIn("P", text) || includedIn("p", text)) {
-            KP1 = getValue(text);
-        }
-        if (includedIn("I", text) || includedIn("i", text)) {
-            KI1 = getValue(text);
-        }
-        if (includedIn("D", text) || includedIn("d", text)) {
-            KD1 = getValue(text);
-        }
-        if (includedIn("O", text) || includedIn("o", text)) {
-            angleOffset = getValue(text);
-        }
-        if (includedIn("BC", text) || includedIn("bc", text)) {
-            //balanceCL12 = getValue(text);
-            //updateBalance(&balanceCL12, &balanceCL1, &balanceCL2);
-        }
-        if (includedIn("BAC", text) || includedIn("bac", text)) {
-            //balanceACL12 = getValue(text);
-            //updateBalance(&balanceACL12, &balanceACL1, &balanceACL2);
+
+        for (int i = 0; i <8; i++) {
+            if (includedIn(strList[i], text)) {
+                text.remove(0, 2);
+                *(val[i]) = getValue(text);
+                break;
+            }
         }
     }
 

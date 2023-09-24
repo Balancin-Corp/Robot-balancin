@@ -1,7 +1,9 @@
 #ifndef controlStage_h
 #define controlStage_h
 
+
 #include <Arduino.h>
+#include <utils.h>
 #include <KalmanAngle.h>
 #include <PWM.h>
 
@@ -29,15 +31,15 @@ extern float KI2;
 extern float KD2;
 extern float PID2;
 extern float rateYawOffset;
+extern float balM1;
+extern float balM2;
 
 extern float elapsedTime;
 
 
-inline int clamp(float, float, float);
-
 void updatePID();
 
 void controlStageLoop(void* pvParameters);
-
+void updateBalance(float PID);
 
 #endif

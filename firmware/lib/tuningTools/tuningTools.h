@@ -6,6 +6,10 @@
 #include <controlStage.h>
 extern BluetoothSerial SerialBT;
 
+
+extern String strList[];
+extern float* val[];
+
 void tuningToolsSetup();
 void printValues(String keyword);
 float getValue(String);
