@@ -30,7 +30,7 @@ float balM2 = 1;
 float rateYawOffset = 0;
 
 float elapsedTime = 0;
-
+int plotState = 0; //0: integral w dt - 1: anglePitch - 2: kalmanAnglePitch  
 
 
 void updatePID() {
@@ -68,6 +68,7 @@ void controlStageLoop(void* pvParameters) {
     while (1) {
         uint32_t initialTime = micros();
         updateKalmanAngle();
+        integratedRatePitch += elapsedTime/1000 * RatePitch; //Multiplies elapsedTime/1000 (s) to RatePitch (*/seg)
         updatePID();
         updateBalance(PID2);
         MotorSpeed(chM1_A, chM1_B, balM1*PID1);

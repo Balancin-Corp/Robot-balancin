@@ -16,6 +16,8 @@ extern float KalmanAnglePitch, KalmanUncertaintyAnglePitch;
 extern float Kalman1DOutput[];
 extern float PitchOffset;
 
+extern float integratedRatePitch;
+
 void gyroSignals();
 void kalman_1d();
 void kalmanAngleSetup();

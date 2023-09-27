@@ -36,6 +36,7 @@ extern float balM2;
 
 extern float elapsedTime;
 
+extern int plotState;
 
 void updatePID();
 

@@ -17,6 +17,21 @@ void setup() {
 //This loop runs on core 1, independently from controlStage task.
 
 void loop() {
+
+  switch (plotState) {
+      case 0: 
+          Serial.println(integratedRatePitch);
+          break;
+      case 1:
+          Serial.println(AnglePitch);
+          break;
+      case 2:
+          Serial.println(KalmanAnglePitch);
+          break;
+      case 3:
+        Serial.println(PID1);
+        break;
+  }
   tuningToolsInput();
   delay(10);
 

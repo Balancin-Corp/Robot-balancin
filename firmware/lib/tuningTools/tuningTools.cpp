@@ -21,6 +21,7 @@ void printValues(String keyword) {
     if (keyword == "angle" || keyword == "all") {//Shows all angle related values
         SerialBT.print("Angle = "); SerialBT.println(KalmanAnglePitch);
         SerialBT.print("AngleOffset = "); SerialBT.println(angleOffset);
+        SerialBT.print("SerialPlot = "); SerialBT.println(plotState);
         SerialBT.println();
     }
     if (keyword == "pid1" || keyword == "all") { //Shows all pid related values
@@ -44,6 +45,7 @@ void printValues(String keyword) {
         SerialBT.println();   
     }
 
+
 }
 
 
@@ -64,11 +66,15 @@ void tuningToolsInput() {
     if (SerialBT.available()) {
         String text = SerialBT.readStringUntil('\n');
     //SerialBT adds an space to text, so it's impossible for it to be empty
-        if (includedIn("IE", text)) { //Sets integral to zero.
+        if (includedIn("ri1", text)) { //Sets integral to zero.
             IE1 = 0;
             return ;
+        }
+        else if (includedIn("ri2", text)) { //Sets integral to zero.
+            integratedRatePitch = 0;
+            return ;
         }   
-        if (includedIn("X", text) || includedIn("x", text)) {
+        else if (includedIn("X", text) || includedIn("x", text)) {
             String keywords[5] = {"angle", "pid1", "pid2", "all"};
             for (int i = 0; i < 5; i++) {
                 if (includedIn(keywords[i], text))
@@ -76,14 +82,19 @@ void tuningToolsInput() {
             }
             return;
         }
-
-        for (int i = 0; i <8; i++) {
-            if (includedIn(strList[i], text)) {
-                text.remove(0, 2);
-                *(val[i]) = getValue(text);
-                break;
-            }
+        else if (includedIn("sp", text)) {
+            text.remove(0, 2);
+            plotState = getValue(text);
         }
-    }
+        else
+            for (int i = 0; i <8; i++) {
+                if (includedIn(strList[i], text)) {
+                    text.remove(0, 2);
+                    *(val[i]) = getValue(text);
+                    break;
+                }
+            }
 
+
+    }
 }
