@@ -21,7 +21,7 @@ extern float KD1;
 extern float PID1;
 
 extern float angleOffset;
-
+extern float PID1_gain; 
 
 extern float E2;
 extern float dE2;

@@ -1,8 +1,8 @@
 #include <tuningTools.h>
 BluetoothSerial SerialBT;
 
-String strList[] = {"p1", "p2", "i1", "i2", "d1", "d2", "o1", "o2"};
-float* val[] = {&KP1, &KP2, &KI1, &KI2, &KD1, &KD2, &angleOffset, &rateYawOffset};
+String strList[] = {"p1", "p2", "i1", "i2", "d1", "d2", "o1", "o2", "pg"};
+float* val[] = {&KP1, &KP2, &KI1, &KI2, &KD1, &KD2, &angleOffset, &rateYawOffset, &PID1_gain};
 
 void tuningToolsSetup() {
     SerialBT.begin("ESP32");
@@ -87,7 +87,7 @@ void tuningToolsInput() {
             plotState = getValue(text);
         }
         else
-            for (int i = 0; i <8; i++) {
+            for (int i = 0; i <9; i++) {
                 if (includedIn(strList[i], text)) {
                     text.remove(0, 2);
                     *(val[i]) = getValue(text);

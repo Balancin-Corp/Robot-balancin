@@ -13,7 +13,8 @@ float KP1 = 0;
 float KI1 = 0;
 float KD1 = 0;
 float PID1 = 0;
-float angleOffset=1;
+float angleOffset = 1;
+float PID1_gain = 1; 
 
 //PID2 (Yaw rate)
 float E2 = 0;
@@ -37,9 +38,10 @@ void updatePID() {
     float prevE1 = E1;
     E1 = KalmanAnglePitch-angleOffset;
     dE1 = RatePitch;
-    IE1 += E1*elapsedTime/1000000; 
+    IE1 += E1*elapsedTime/1000000;
+    float prevPID1 = PID1; 
     PID1 = clamp(-PWMscale, KP1*E1 + KI1*IE1 + KD1*dE1, PWMscale);
-
+    PID1 = prevPID1 + PID1_gain*(PID1-prevPID1);
     float prevE2 = E2;
     E2 = RateYaw - rateYawOffset;
     dE2 = (E2-prevE2)/elapsedTime;

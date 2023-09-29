@@ -9,8 +9,8 @@ $$
 $$
 $$
 \begin{split}
-\theta _\text{pitch}=\arctan\left( \frac{-a_{x}}{\sqrt{ a_{y}^{2}+a_{z}^{2} }} \right) \\
-\theta _\text{roll}=\arctan\left( \frac{a_{y}}{\sqrt{ a_{x}^{2}+a_{z}^{2} }} \right)
+\theta _\text{pitch}=\arctan\left( \frac{-Acc_{x}}{\sqrt{ Acc_{y}^{2}+Acc_{z}^{2} }} \right) \\
+\theta _\text{roll}=\arctan\left( \frac{Acc_{y}}{\sqrt{ Acc_{x}^{2}+Acc_{z}^{2} }} \right)
 
 \end{split}
 $$
